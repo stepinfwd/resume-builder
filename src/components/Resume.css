@@ -1,0 +1,50 @@
+.resume {
+  padding-left: 4rem;
+  margin: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  text-align: left;
+  font-family: 'Hind', sans-serif;
+}
+.resume-name-tag{
+    width: 3rem;
+    height: 3rem;
+    background-color: rgb(90, 241, 153);
+    font-weight: 800;
+    text-align:center;
+    letter-spacing: .1rem;
+}
+.resume-skills{
+    width: 40vw;
+}
+
+/* colours */
+h2 {
+  color: #333333;
+}
+.greyed-text {
+  color: #888888;
+}
+h3 {
+  color: #555555;
+}
+p{
+    color: #000;
+}
+
+/* SKILL TAG */
+.skill-tag {
+    display: flex;
+    justify-content:space-around
+}
+.skill-tag p{
+    width: 100%;
+    background-color:#DFE9E4;
+    margin: 8px;
+    padding: 3px;
+    text-align:center;
+    flex-wrap: wrap;
+    border-radius: 4px;
+
+}
