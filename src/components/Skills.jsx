@@ -1,10 +1,18 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
 const animatedComponents = makeAnimated();
-function Skills() {
+function Skills({ skillData }) {
+  const [selectedOption, setselectedOption] = useState();
+
+  const handleChange = (input) => {
+    setselectedOption(input);
+  };
+  useEffect(() => {
+    skillData(selectedOption);
+  }, [selectedOption,skillData]);
   const options = [
     { value: "HTML", label: "HTML" },
     { value: "REACTJS", label: "REACTJS" },
@@ -22,6 +30,8 @@ function Skills() {
         options={options}
         components={animatedComponents}
         defaultValue={options[4]}
+        value={selectedOption}
+        onChange={handleChange}
         isMulti
       />
     </div>

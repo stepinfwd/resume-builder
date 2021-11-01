@@ -1,16 +1,14 @@
-import React from 'react'
+import React from "react";
 
-
-function SkillTag() {
-    return (
-        <div className="skill-tag">
-            <p>HTML</p>
-            <p>REACT</p>
-
-            <p>Go</p>
-
-        </div>
-    )
+function SkillTag(skillsData) {
+  return (
+    <div className="skill-tag">
+      {skillsData?.map((item) => 
+      
+        <p>HTML</p>
+      )}
+    </div>
+  );
 }
 
-export default SkillTag
+export default SkillTag;

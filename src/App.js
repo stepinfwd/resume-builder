@@ -2,17 +2,41 @@ import './App.css';
 import React from 'react'
 import Form from './components/Form';
 import Resume from './components/Resume';
-import Pdf from "react-to-pdf";
+import Navbar from './components/Navbar'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import  { useState, useEffect } from 'react'
+
+
 
 function App() {
-  const ref = React.createRef();
 
+  const [data, setdata] = useState()
+  const resumeData =(payload)=>{
+    setdata(payload)
+  }
+  useEffect(() => {
+console.log("resumedata is",data)
+  }, [data])
   return (
     <div className="App">
-     {/* <Form/> */}
-     <Resume ref={ref}/>
+      <Router>
+        <Navbar/>
+        <Switch>
+          <Route exact path="/">
+            <Form resumeData={resumeData} />
+          </Route>
+          <Route path="/resume">
+            <Resume data={data} />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
+
 
 export default App;

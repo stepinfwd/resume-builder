@@ -1,0 +1,18 @@
+.navbar{
+    height:5vw;
+    width:100%;
+    background-color:rgb(117, 0, 252);
+
+
+
+}
+.navbar p{
+color:rgb(241, 242, 243);
+font-size: 22px;
+font-weight:700;
+text-align: left;
+padding: 20px;
+margin:0;
+
+
+}
