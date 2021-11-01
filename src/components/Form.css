@@ -121,7 +121,7 @@
     margin-top: 30px;
   }
   
-  button {
+  .addmore-button,.delete-item {
     display: block;
     appearance: none;
     margin-top: 40px;
@@ -130,6 +130,7 @@
     text-transform: uppercase;
     padding: 10px 20px;
     border-radius: 4px;
+    width: 120px;
   }
   
   .form-section{
@@ -152,4 +153,10 @@
     .form-bio textarea{ 
         width: 100%;
         height: 10vw;
+    }
+    .delete-item{
+        background-color: #e90013;
+        color:white;
+        border: none; 
+        font-weight: 800;
     }

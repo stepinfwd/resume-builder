@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { useState ,useEffect} from "react";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import "./Form.css";
@@ -8,31 +8,50 @@ import { useHistory } from "react-router-dom";
 import DateComponent from "./Date";
 
 const resumeSchema = yup.object().shape({
-  firstName: yup.string().required(),
-  lastName: yup.string().required(),
+  firstName: yup.string(),
+  lastName: yup.string(),
   github: yup.string().url(),
-  email: yup
-    .string()
-    .email("Must be a valid email")
-    .max(255)
-    .required("Email is required"),
+  email: yup.string().email("Must be a valid email").max(255),
 });
 function Form({ resumeData }) {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(resumeSchema),
+    defaultValues: {
+      experience: [
+        { company: "", designation: "", expStartDate: "", expEndDate: "" },
+      ],
+      education: [
+        { institute: "", degree: "", expStartDate: "", expEndDate: "" },
+      ],
+    },
   });
+
+  const { fields, append, prepend, remove } = useFieldArray({
+    control, // control props comes from useForm (optional: if you are using FormContext)
+    name: "experience", // unique name for your Field Array
+    // keyName: "id", default to "id", you can change the key name
+  });
+  const {
+    fields: eduFields,
+    append: eduAppend,
+    remove: eduRemove,
+  } = useFieldArray({ control, name: "education" });
 
   const [skills, setSkills] = useState();
   const history = useHistory();
 
   const skillData = (data) => {
-    // const skillMapped = data?.map((item) => item.value);
-    // setSkills(skillMapped);
+    const skillMapped = data?.map((item) => item.value);
+    setSkills(skillMapped);
   };
+//   useEffect(() => {
+//       console.log("skill is",skills)
+//   }, [skills])
   const onSubmit = (data) => {
     // alert(JSON.stringify(data));
     console.log("Data is", data);
@@ -46,6 +65,7 @@ function Form({ resumeData }) {
       history.push("/resume");
     }, 1000);
   };
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -93,39 +113,130 @@ function Form({ resumeData }) {
         <div className="form-section">
           <h3>Experience</h3>
           <div>
-            <label>company</label>
+            {/* <label>company</label>
             <input {...register("company")} placeholder="company" />
 
             <label>designation</label>
             <input {...register("designation")} placeholder="designation" />
 
             <label>start date</label>
-            {/* <input {...register("expStartDate")} /> */}
             <DateComponent {...register("expStartDate")} />
 
             <label>end date</label>
-            <DateComponent {...register("expStartDate")} />
+            <DateComponent {...register("expStartDate")} /> */}
+
+            {fields.map((item, index) => (
+              <>
+                <label>company</label>
+
+                <li key={item.id}>
+                  <input {...register(`experience.${index}.company`)} />
+                  <label>designation</label>
+
+                  <Controller
+                    render={({ field }) => <input {...field} />}
+                    name={`experience.${index}.designation`}
+                    control={control}
+                  />
+                  <label>start date</label>
+                  <DateComponent
+                    {...register(`experience.${index}.expStartDate`)}
+                  />
+
+                  <label>end date</label>
+                  <DateComponent
+                    {...register(`experience.${index}.expEndDate`)}
+                  />
+                  <button
+                    type="button"
+                    className="delete-item"
+                    onClick={() => remove(index)}
+                  >
+                    Delete
+                  </button>
+                </li>
+              </>
+            ))}
+            <button
+              className="addmore-button"
+              type="button"
+              onClick={() =>
+                append({
+                  company: "",
+                  designation: "",
+                  expStartData: "",
+                  expEndDate: "",
+                })
+              }
+            >
+              add item
+            </button>
           </div>
-          <button className="addmore-button">+ add more</button>
+          {/* <button className="addmore-button">+ add more</button> */}
         </div>
         <div className="form-section">
           <h3>Education</h3>
           <div>
-            <label>institute</label>
+            {/* <label>institute</label>
             <input {...register("institute")} placeholder="institute" />
 
             <label>degree</label>
             <input {...register("degree")} placeholder="degree" />
 
             <label>start date</label>
-            {/* <input {...register("eduStartDate")} placeholder="first name" /> */}
             <DateComponent {...register("eduStartDate")} />
 
             <label>end date</label>
-            {/* <input {...register("eduEndDate")} /> */}
-            <DateComponent {...register("eduEndDate")} />
+            <input {...register("eduEndDate")} />
+            <DateComponent {...register("eduEndDate")} /> */}
+
+            {eduFields.map((item, index) => (
+              <>
+                <label>institute</label>
+
+                <li key={item.id}>
+                  <input {...register(`education.${index}.institute`)} />
+                  <label>degree</label>
+
+                  <Controller
+                    render={({ field }) => <input {...field} />}
+                    name={`education.${index}.degree`}
+                    control={control}
+                  />
+                  <label>start date</label>
+                  <DateComponent
+                    {...register(`education.${index}.eduStartDate`)}
+                  />
+
+                  <label>end date</label>
+                  <DateComponent
+                    {...register(`education.${index}.eduEndDate`)}
+                  />
+                  <button
+                    type="button"
+                    className="delete-item"
+                    onClick={() => eduRemove(index)}
+                  >
+                    Delete
+                  </button>
+                </li>
+              </>
+            ))}
           </div>
-          <button className="addmore-button">+ add more</button>
+          <button
+            className="addmore-button"
+            type="button"
+            onClick={() =>
+              eduAppend({
+                institute: "",
+                degree: "",
+                eduStartData: "",
+                eduEndDate: "",
+              })
+            }
+          >
+            add item
+          </button>{" "}
         </div>
         <div className="form-section">
           <h3>Skills</h3>

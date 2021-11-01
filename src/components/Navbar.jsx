@@ -5,10 +5,9 @@ function Navbar() {
   return (
     <div className="navbar">
       <p>
-        makeResume
+       <span> make</span>Resume
       </p>
     </div>
   );
 }
-
 export default Navbar;
