@@ -6,7 +6,7 @@ import "./Form.css";
 import Skills from "../components/Skills";
 import { useHistory } from "react-router-dom";
 import DatePicker from "react-datepicker";
-
+import "react-datepicker/dist/react-datepicker.css";
 const resumeSchema = yup.object().shape({
   firstName: yup.string(),
   lastName: yup.string(),
@@ -132,6 +132,7 @@ function Form({ resumeData }) {
                         onChange={onChange}
                         onBlur={onBlur}
                         selected={value}
+                        
                       />
                     )}
                   />
