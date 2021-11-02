@@ -52,9 +52,7 @@ p{
   display: block;
   color: #fff;
   appearance: none;
-  margin-top: 40px;
   border: 1px solid rgb(255, 255, 255);
-  margin-bottom: 20px;
   text-transform: uppercase;
   padding: 10px 20px;
   border-radius: 4px;
@@ -65,5 +63,5 @@ p{
 .download-resume{
   position: absolute;
   right: 10px;
-  bottom:0;
+  top:0;
 }

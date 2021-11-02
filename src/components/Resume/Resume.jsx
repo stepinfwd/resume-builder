@@ -6,7 +6,7 @@ import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 
 function Resume({ data }) {
-  console.log("Data incoming", data);
+  console.log("Data incoming", new Date().toISOString());
   const myRef = useRef(null);
   const printDocument = () => {
     html2canvas(myRef.current).then((canvas) => {

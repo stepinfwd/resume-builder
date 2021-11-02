@@ -9,8 +9,8 @@ import DateComponent from "../components/Date";
 import DatePicker from "react-datepicker";
 
 const resumeSchema = yup.object().shape({
-  firstName: yup.string().required(),
-  lastName: yup.string().required(),
+  firstName: yup.string(),
+  lastName: yup.string(),
   github: yup.string().url(),
   email: yup.string().email("Must be a valid email").max(255),
 });
@@ -124,13 +124,32 @@ function Form({ resumeData }) {
                     control={control}
                   />
                   <label>start date</label>
-                  <DateComponent
-                    {...register(`experience.${index}.expStartDate`)}
+                  <Controller
+                    control={control}
+                    name={`experience.${index}.expStartDate`}
+
+                    render={({ field: { onChange, onBlur, value } }) => (
+                      <DatePicker
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        selected={value}
+                      />
+                    )}
                   />
 
                   <label>end date</label>
-                  <DateComponent
-                    {...register(`experience.${index}.expEndDate`)}
+        
+                   <Controller
+                    control={control}
+                    name={`experience.${index}.expEndDate`}
+
+                    render={({ field: { onChange, onBlur, value } }) => (
+                      <DatePicker
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        selected={value}
+                      />
+                    )}
                   />
                   <button
                     type="button"
@@ -181,14 +200,13 @@ function Form({ resumeData }) {
                   <section>
                   <Controller
                     control={control}
-                    name={`education.${index}.expStartDate`}
+                    name={`education.${index}.eduStartDate`}
 
                     render={({ field: { onChange, onBlur, value } }) => (
                       <DatePicker
                         onChange={onChange}
                         onBlur={onBlur}
                         selected={value}
-                        dateFormat="dd/MM/yyyy"
                       />
                     )}
                   />
@@ -197,14 +215,13 @@ function Form({ resumeData }) {
                   <label>end date</label>
                   <Controller
                     control={control}
-                    name={`education.${index}.expEndDate`}
+                    name={`education.${index}.eduEndDate`}
 
                     render={({ field: { onChange, onBlur, value } }) => (
                       <DatePicker
                         onChange={onChange}
                         onBlur={onBlur}
                         selected={value}
-                        dateFormat="dd/MM/yyyy"
 
                       />
                     )}
