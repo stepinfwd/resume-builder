@@ -12,7 +12,7 @@ function Skills({ skillData }) {
   };
   useEffect(() => {
     skillData(selectedOption);
-  }, [selectedOption]);
+  }, [selectedOption,skillData]);
   const options = [
     { value: "HTML", label: "HTML" },
     { value: "REACTJS", label: "REACTJS" },
