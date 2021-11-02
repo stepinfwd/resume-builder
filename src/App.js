@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react'
+import React,{ useState }  from 'react'
 import Form from './components/Form/Form';
 import Resume from './components/Resume/Resume';
 import Navbar from './components/Navbar/Navbar'
@@ -8,26 +8,22 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import  { useState, useEffect } from 'react'
-
-
+import Footer from './components/Footer/Footer';
 
 function App() {
-
   const [data, setdata] = useState()
   const resumeData =(payload)=>{
     setdata(payload)
   }
-  useEffect(() => {
-console.log("resumedata is",data)
-  }, [data])
+
   return (
     <div className="App">
       <Router>
-        <Navbar/>
         <Switch>
           <Route exact path="/">
+          <Navbar/>
             <Form resumeData={resumeData} />
+            <Footer/>
           </Route>
           <Route path="/resume">
             <Resume data={data} />

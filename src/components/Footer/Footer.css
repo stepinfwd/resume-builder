@@ -1,0 +1,13 @@
+.hr-line {
+    background: rgba(0, 0, 0, 0.1);
+    height: 1px;
+    width: 80vw;
+    margin: 2rem auto;
+  }
+  footer .footer-container{
+      height: 80px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }

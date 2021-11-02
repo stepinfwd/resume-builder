@@ -1,5 +1,5 @@
 import React from "react";
-// import SkillTag from "../components/SkillTag"
+import SkillTag from "../components/SkillTag"
 import "./Resume.css";
 function Resume({ data }) {
   console.log("Data incoming", data);
@@ -7,7 +7,7 @@ function Resume({ data }) {
   return (
     <div className="resume">
       <div className="resume-name-tag">
-        <p>MV</p>
+        <p>{data?.firstName?.slice(0,1)}{data?.lastName?.slice(0,1)}</p>
       </div>
       <div className="resume-bio">
         <h2>{data?.firstName}</h2>
@@ -23,7 +23,7 @@ function Resume({ data }) {
           <div>
             <h3>{exp?.company}</h3>
             <p className="greyed-text">
-              {data?.designation} | {exp.expStartdate} -  {exp.expEnddate} 
+              {data?.designation} | {exp?.expStartdate} - {exp?.expEnddate}
             </p>
             <ul>
               <li>
@@ -40,18 +40,19 @@ function Resume({ data }) {
       ))}
 
       {/* Education */}
-      <div className="resume-education">
-        <h3>Education </h3>
-        <p>{data?.institute}</p>
-        <p>
-          {data?.degree}|{data?.eduStartdate}-{data?.eduEnddate}{" "}
-        </p>
-      </div>
-
+      {data?.education?.map((education) => (
+        <div className="resume-education">
+          <h3>Education </h3>
+          <p>{education?.institute}</p>
+          <p>
+            {education?.degree}|{education?.eduStartdate}-{education?.eduEnddate}
+          </p>
+        </div>
+      ))}
       {/* Skills */}
       <div className="resume-skills">
         <h3>SKILLS</h3>
-        {/* <SkillTag skillsData={skillsData}/> */}
+        <SkillTag skillsData={data?.skills}/>
       </div>
     </div>
   );

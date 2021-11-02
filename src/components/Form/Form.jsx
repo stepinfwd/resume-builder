@@ -112,7 +112,6 @@ function Form({ resumeData }) {
           <div>
             {fields.map((item, index) => (
               <>
-
                 <li key={item.id}>
                 <label>company</label>
 
@@ -177,7 +176,7 @@ function Form({ resumeData }) {
                     name={`education.${index}.degree`}
                     control={control}
                   />
-                  <label>start test date</label>
+                  <label>start date</label>
 
                   <section>
                   <Controller
@@ -189,6 +188,7 @@ function Form({ resumeData }) {
                         onChange={onChange}
                         onBlur={onBlur}
                         selected={value}
+                        dateFormat="dd/MM/yyyy"
                       />
                     )}
                   />
@@ -204,6 +204,8 @@ function Form({ resumeData }) {
                         onChange={onChange}
                         onBlur={onBlur}
                         selected={value}
+                        dateFormat="dd/MM/yyyy"
+
                       />
                     )}
                   />
