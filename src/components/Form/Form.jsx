@@ -1,11 +1,12 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState} from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import "./Form.css";
-import Skills from "./Skills";
+import Skills from "../components/Skills";
 import { useHistory } from "react-router-dom";
-import DateComponent from "./Date";
+import DateComponent from "../components/Date";
+import DatePicker from "react-datepicker";
 
 const resumeSchema = yup.object().shape({
   firstName: yup.string(),
@@ -26,12 +27,12 @@ function Form({ resumeData }) {
         { company: "", designation: "", expStartDate: "", expEndDate: "" },
       ],
       education: [
-        { institute: "", degree: "", expStartDate: "", expEndDate: "" },
+        { institute: "", degree: "", eduStartDate: "", eduEndDate: "" },
       ],
     },
   });
 
-  const { fields, append, prepend, remove } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control, // control props comes from useForm (optional: if you are using FormContext)
     name: "experience", // unique name for your Field Array
     // keyName: "id", default to "id", you can change the key name
@@ -49,22 +50,17 @@ function Form({ resumeData }) {
     const skillMapped = data?.map((item) => item.value);
     setSkills(skillMapped);
   };
-//   useEffect(() => {
-//       console.log("skill is",skills)
-//   }, [skills])
+
   const onSubmit = (data) => {
-    // alert(JSON.stringify(data));
     console.log("Data is", data);
     let payload = data;
     payload["skills"] = skills;
-    console.log("Payload is", payload);
-    localStorage.setItem("resume", JSON.stringify(payload));
     resumeData(payload);
     setTimeout(() => {
-      console.log("Submitted.....");
       history.push("/resume");
     }, 1000);
   };
+
 
   return (
     <>
@@ -103,33 +99,23 @@ function Form({ resumeData }) {
               <p className="form-error">{errors.github.message}</p>
             )}
             <label>Phone No</label>
-            <input {...register("PhoneNo")} placeholder="phone number" />
+            <input {...register("phoneNo")} placeholder="phone number" />
 
             <label>Address</label>
-            <input {...register("Address")} placeholder="address" />
+            <input {...register("address")} placeholder="address" />
           </div>
         </div>
 
+{/* EXPERIENCE */}
         <div className="form-section">
           <h3>Experience</h3>
           <div>
-            {/* <label>company</label>
-            <input {...register("company")} placeholder="company" />
-
-            <label>designation</label>
-            <input {...register("designation")} placeholder="designation" />
-
-            <label>start date</label>
-            <DateComponent {...register("expStartDate")} />
-
-            <label>end date</label>
-            <DateComponent {...register("expStartDate")} /> */}
-
             {fields.map((item, index) => (
               <>
-                <label>company</label>
 
                 <li key={item.id}>
+                <label>company</label>
+
                   <input {...register(`experience.${index}.company`)} />
                   <label>designation</label>
 
@@ -172,24 +158,12 @@ function Form({ resumeData }) {
               add item
             </button>
           </div>
-          {/* <button className="addmore-button">+ add more</button> */}
         </div>
+
+ {/* EDUCATION */}
         <div className="form-section">
           <h3>Education</h3>
           <div>
-            {/* <label>institute</label>
-            <input {...register("institute")} placeholder="institute" />
-
-            <label>degree</label>
-            <input {...register("degree")} placeholder="degree" />
-
-            <label>start date</label>
-            <DateComponent {...register("eduStartDate")} />
-
-            <label>end date</label>
-            <input {...register("eduEndDate")} />
-            <DateComponent {...register("eduEndDate")} /> */}
-
             {eduFields.map((item, index) => (
               <>
                 <label>institute</label>
@@ -203,14 +177,35 @@ function Form({ resumeData }) {
                     name={`education.${index}.degree`}
                     control={control}
                   />
-                  <label>start date</label>
-                  <DateComponent
-                    {...register(`education.${index}.eduStartDate`)}
+                  <label>start test date</label>
+
+                  <section>
+                  <Controller
+                    control={control}
+                    name={`education.${index}.expStartDate`}
+
+                    render={({ field: { onChange, onBlur, value } }) => (
+                      <DatePicker
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        selected={value}
+                      />
+                    )}
                   />
+                  </section>
 
                   <label>end date</label>
-                  <DateComponent
-                    {...register(`education.${index}.eduEndDate`)}
+                  <Controller
+                    control={control}
+                    name={`education.${index}.expEndDate`}
+
+                    render={({ field: { onChange, onBlur, value } }) => (
+                      <DatePicker
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        selected={value}
+                      />
+                    )}
                   />
                   <button
                     type="button"
@@ -238,7 +233,7 @@ function Form({ resumeData }) {
             add item
           </button>{" "}
         </div>
-        <div className="form-section">
+        <div className="form-section form-skills">
           <h3>Skills</h3>
           <Skills skillData={skillData} />
         </div>

@@ -1,12 +1,11 @@
 import React from "react";
 
-function SkillTag(skillsData) {
+function SkillTag({skillsData}) {
   return (
     <div className="skill-tag">
-      {skillsData?.map((item) => 
-      
-        <p>HTML</p>
-      )}
+      {skillsData?.map((item) => (
+        <p>{item}</p>
+      ))}
     </div>
   );
 }

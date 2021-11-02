@@ -1,8 +1,8 @@
 import './App.css';
 import React from 'react'
-import Form from './components/Form';
-import Resume from './components/Resume';
-import Navbar from './components/Navbar'
+import Form from './components/Form/Form';
+import Resume from './components/Resume/Resume';
+import Navbar from './components/Navbar/Navbar'
 import {
   BrowserRouter as Router,
   Switch,
