@@ -6,7 +6,7 @@ export default function Footer() {
       <footer id="sticky-footer" >
         <div className="hr-line"></div>
         <div className="footer-container">
-          <small>Copyright &copy; RESUME MAKER </small>
+          <small>Copyright &copy; MAKE RESUME </small>
         </div>
       </footer>
     </footer>

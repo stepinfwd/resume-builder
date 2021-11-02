@@ -48,3 +48,22 @@ p{
     border-radius: 4px;
 
 }
+.resume-download{
+  display: block;
+  color: #fff;
+  appearance: none;
+  margin-top: 40px;
+  border: 1px solid rgb(255, 255, 255);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+  width: 180px;
+  font-weight: 800;
+  background-color:#535ef5;
+}
+.download-resume{
+  position: absolute;
+  right: 10px;
+  bottom:0;
+}

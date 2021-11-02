@@ -9,8 +9,8 @@ import DateComponent from "../components/Date";
 import DatePicker from "react-datepicker";
 
 const resumeSchema = yup.object().shape({
-  firstName: yup.string(),
-  lastName: yup.string(),
+  firstName: yup.string().required(),
+  lastName: yup.string().required(),
   github: yup.string().url(),
   email: yup.string().email("Must be a valid email").max(255),
 });

@@ -9,7 +9,7 @@
     padding: 2rem;
    
   }
-  li{
+  .form-section li{
     list-style: none;
   }
   
@@ -131,7 +131,7 @@
     letter-spacing: .5px;  }
 
     .form-bio textarea{ 
-        width: 100%;
+        width: 94%;
         height: 10vw;
         padding:1rem;
     }
