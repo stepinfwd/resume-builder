@@ -5,7 +5,6 @@ import * as yup from "yup";
 import "./Form.css";
 import Skills from "../components/Skills";
 import { useHistory } from "react-router-dom";
-import DateComponent from "../components/Date";
 import DatePicker from "react-datepicker";
 
 const resumeSchema = yup.object().shape({
