@@ -8,10 +8,12 @@ import { useHistory } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 const resumeSchema = yup.object().shape({
-  firstName: yup.string(),
-  lastName: yup.string(),
-  github: yup.string().url(),
-  email: yup.string().email("Must be a valid email").max(255),
+  firstName: yup.string().required(),
+  lastName: yup.string().required(),
+  github: yup.string().url().required(),
+  address: yup.string().required(),
+  phoneNo: yup.number().required(),
+  email: yup.string().email("Must be a valid email").max(255).required(),
 });
 function Form({ resumeData }) {
   const {
@@ -99,9 +101,14 @@ function Form({ resumeData }) {
             )}
             <label>Phone No</label>
             <input {...register("phoneNo")} placeholder="phone number" />
-
+            {errors.phoneNo && (
+              <p className="form-error">{errors.phoneNo.message}</p>
+            )}
             <label>Address</label>
             <input {...register("address")} placeholder="address" />
+            {errors.address && (
+              <p className="form-error">{errors.address.message}</p>
+            )}
           </div>
         </div>
 
@@ -252,10 +259,10 @@ function Form({ resumeData }) {
             add item
           </button>{" "}
         </div>
-        <div className="form-section form-skills">
+       {skillData&& <div className="form-section form-skills">
           <h3>Skills</h3>
           <Skills skillData={skillData} />
-        </div>
+        </div>}
         <input type="submit" />
       </form>
     </>

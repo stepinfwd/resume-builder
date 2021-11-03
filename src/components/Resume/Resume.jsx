@@ -4,9 +4,10 @@ import "./Resume.css";
 import { useRef } from "react";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
+import moment from "moment";
 
 function Resume({ data }) {
-  console.log("Data incoming", new Date().toISOString());
+//  using ref for pdf download by taking image
   const myRef = useRef(null);
   const printDocument = () => {
     html2canvas(myRef.current).then((canvas) => {
@@ -21,7 +22,7 @@ function Resume({ data }) {
     <>
       <div className="download-resume">
         <button className="resume-download" onClick={printDocument}>
-          DOWNLOAD{" "}
+          DOWNLOAD
         </button>
       </div>
       <div className="resume" ref={myRef}>
@@ -35,17 +36,17 @@ function Resume({ data }) {
           <h2>{data?.firstName}</h2>
           <p>{data?.currentPosition}</p>
           <p className="greyed-text">
-            {data?.address} | {data?.github} | {data?.email} | {data?.phoneNo}{" "}
+            {data?.address} | {data?.github} | {data?.email} | {data?.phoneNo}
           </p>
           <p>{data?.biography}</p>
         </div>
+        <h2>WORK EXPERIENCE</h2>
         {data?.experience?.map((exp) => (
           <div className="resume-experience">
-            <h2>WORK EXPERIENCE</h2>
             <div>
               <h3>{exp?.company}</h3>
               <p className="greyed-text">
-                {data?.designation} | {exp?.expStartdate} - {exp?.expEnddate}
+                {exp?.designation} | {moment(exp?.expStartdate).format('MMM YYYY')} - {moment(exp?.expEndDate).format('MMM YYYY')}
               </p>
               <ul>
                 <li>
@@ -62,21 +63,22 @@ function Resume({ data }) {
         ))}
 
         {/* Education */}
+        <h2>EDUCATION </h2>
         {data?.education?.map((education) => (
           <div className="resume-education">
-            <h3>Education </h3>
             <p>{education?.institute}</p>
             <p className="greyed-text">
-              {education?.degree} | {education?.eduStartdate} - 
-              {education?.eduEnddate}
+              {education?.degree} | {moment(education?.eduStartdate).format('MMM YYYY')} - 
+              {moment(education?.eduEndDate).format('MMM YYYY')}
             </p>
           </div>
         ))}
+
         {/* Skills */}
-        <div className="resume-skills">
+      {data?.skills&&  <div className="resume-skills">
           <h3>SKILLS</h3>
           <SkillTag skillsData={data?.skills} />
-        </div>
+        </div>}
       </div>
     </>
   );
