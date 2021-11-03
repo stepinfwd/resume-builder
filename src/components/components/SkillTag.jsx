@@ -3,8 +3,8 @@ import React from "react";
 function SkillTag({skillsData}) {
   return (
     <div className="skill-tag">
-      {skillsData?.map((item) => (
-        <p>{item}</p>
+      {skillsData?.map((item,index) => (
+        <p key={index}>{item}</p>
       ))}
     </div>
   );

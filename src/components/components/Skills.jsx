@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
@@ -12,10 +12,10 @@ function Skills({ skillData }) {
   };
   useEffect(() => {
     function wrapFunc() {
-     skillData(selectedOption);
+      skillData(selectedOption);
     }
     wrapFunc();
-  }, [selectedOption,skillData]);
+  }, [selectedOption, skillData]);
   const options = [
     { value: "HTML", label: "HTML" },
     { value: "REACTJS", label: "REACTJS" },

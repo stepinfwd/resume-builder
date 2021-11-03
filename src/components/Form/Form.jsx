@@ -1,4 +1,4 @@
-import React, { useState,useCallback} from "react";
+import React, { useState, useCallback } from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -50,7 +50,7 @@ function Form({ resumeData }) {
   const skillData = useCallback((data) => {
     const skillMapped = data?.map((item) => item.value);
     setSkills(skillMapped);
-  },[]);
+  }, []);
 
   const onSubmit = (data) => {
     console.log("Data is", data);
@@ -61,7 +61,6 @@ function Form({ resumeData }) {
       history.push("/resume");
     }, 1000);
   };
-
 
   return (
     <>
@@ -112,61 +111,56 @@ function Form({ resumeData }) {
           </div>
         </div>
 
-{/* EXPERIENCE */}
+        {/* EXPERIENCE */}
         <div className="form-section">
           <h3>Experience</h3>
           <div>
             {fields.map((item, index) => (
-              <>
-                <li key={item.id}>
+              <li key={item.id}>
                 <label>company</label>
 
-                  <input {...register(`experience.${index}.company`)} />
-                  <label>designation</label>
+                <input {...register(`experience.${index}.company`)} />
+                <label>designation</label>
 
-                  <Controller
-                    render={({ field }) => <input {...field} />}
-                    name={`experience.${index}.designation`}
-                    control={control}
-                  />
-                  <label>start date</label>
-                  <Controller
-                    control={control}
-                    name={`experience.${index}.expStartDate`}
+                <Controller
+                  render={({ field }) => <input {...field} />}
+                  name={`experience.${index}.designation`}
+                  control={control}
+                />
+                <label>start date</label>
+                <Controller
+                  control={control}
+                  name={`experience.${index}.expStartDate`}
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <DatePicker
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      selected={value}
+                    />
+                  )}
+                />
 
-                    render={({ field: { onChange, onBlur, value } }) => (
-                      <DatePicker
-                        onChange={onChange}
-                        onBlur={onBlur}
-                        selected={value}
-                        
-                      />
-                    )}
-                  />
+                <label>end date</label>
 
-                  <label>end date</label>
-        
-                   <Controller
-                    control={control}
-                    name={`experience.${index}.expEndDate`}
-
-                    render={({ field: { onChange, onBlur, value } }) => (
-                      <DatePicker
-                        onChange={onChange}
-                        onBlur={onBlur}
-                        selected={value}
-                      />
-                    )}
-                  />
-                  <button
-                    type="button"
-                    className="delete-item"
-                    onClick={() => remove(index)}
-                  >
-                    Delete
-                  </button>
-                </li>
-              </>
+                <Controller
+                  control={control}
+                  name={`experience.${index}.expEndDate`}
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <DatePicker
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      selected={value}
+                    />
+                  )}
+                />
+                <button
+                  type="button"
+                  className="delete-item"
+                  onClick={() => remove(index)}
+                >
+                  Delete
+                </button>
+              </li>
             ))}
             <button
               className="addmore-button"
@@ -185,30 +179,28 @@ function Form({ resumeData }) {
           </div>
         </div>
 
- {/* EDUCATION */}
+        {/* EDUCATION */}
         <div className="form-section">
           <h3>Education</h3>
           <div>
             {eduFields.map((item, index) => (
-              <>
+              <li key={item.id}>
                 <label>institute</label>
 
-                <li key={item.id}>
-                  <input {...register(`education.${index}.institute`)} />
-                  <label>degree</label>
+                <input {...register(`education.${index}.institute`)} />
+                <label>degree</label>
 
-                  <Controller
-                    render={({ field }) => <input {...field} />}
-                    name={`education.${index}.degree`}
-                    control={control}
-                  />
-                  <label>start date</label>
+                <Controller
+                  render={({ field }) => <input {...field} />}
+                  name={`education.${index}.degree`}
+                  control={control}
+                />
+                <label>start date</label>
 
-                  <section>
+                <section>
                   <Controller
                     control={control}
                     name={`education.${index}.eduStartDate`}
-
                     render={({ field: { onChange, onBlur, value } }) => (
                       <DatePicker
                         onChange={onChange}
@@ -217,31 +209,28 @@ function Form({ resumeData }) {
                       />
                     )}
                   />
-                  </section>
+                </section>
 
-                  <label>end date</label>
-                  <Controller
-                    control={control}
-                    name={`education.${index}.eduEndDate`}
-
-                    render={({ field: { onChange, onBlur, value } }) => (
-                      <DatePicker
-                        onChange={onChange}
-                        onBlur={onBlur}
-                        selected={value}
-
-                      />
-                    )}
-                  />
-                  <button
-                    type="button"
-                    className="delete-item"
-                    onClick={() => eduRemove(index)}
-                  >
-                    Delete
-                  </button>
-                </li>
-              </>
+                <label>end date</label>
+                <Controller
+                  control={control}
+                  name={`education.${index}.eduEndDate`}
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <DatePicker
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      selected={value}
+                    />
+                  )}
+                />
+                <button
+                  type="button"
+                  className="delete-item"
+                  onClick={() => eduRemove(index)}
+                >
+                  Delete
+                </button>
+              </li>
             ))}
           </div>
           <button
@@ -259,10 +248,12 @@ function Form({ resumeData }) {
             add item
           </button>{" "}
         </div>
-       {skillData&& <div className="form-section form-skills">
-          <h3>Skills</h3>
-          <Skills skillData={skillData} />
-        </div>}
+        {skillData && (
+          <div className="form-section form-skills">
+            <h3>Skills</h3>
+            <Skills skillData={skillData} />
+          </div>
+        )}
         <input type="submit" />
       </form>
     </>

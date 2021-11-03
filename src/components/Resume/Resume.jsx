@@ -7,7 +7,7 @@ import html2canvas from "html2canvas";
 import moment from "moment";
 
 function Resume({ data }) {
-//  using ref for pdf download by taking image
+  //  using ref for pdf download by taking image
   const myRef = useRef(null);
   const printDocument = () => {
     html2canvas(myRef.current).then((canvas) => {
@@ -41,12 +41,14 @@ function Resume({ data }) {
           <p>{data?.biography}</p>
         </div>
         <h2>WORK EXPERIENCE</h2>
-        {data?.experience?.map((exp) => (
-          <div className="resume-experience">
+        {data?.experience?.map((exp, index) => (
+          <div className="resume-experience" key={index}>
             <div>
               <h3>{exp?.company}</h3>
               <p className="greyed-text">
-                {exp?.designation} | {moment(exp?.expStartdate).format('MMM YYYY')} - {moment(exp?.expEndDate).format('MMM YYYY')}
+                {exp?.designation} |{" "}
+                {moment(exp?.expStartdate).format("MMM YYYY")} -{" "}
+                {moment(exp?.expEndDate).format("MMM YYYY")}
               </p>
               <ul>
                 <li>
@@ -64,21 +66,24 @@ function Resume({ data }) {
 
         {/* Education */}
         <h2>EDUCATION </h2>
-        {data?.education?.map((education) => (
-          <div className="resume-education">
+        {data?.education?.map((education, index) => (
+          <div className="resume-education" key={index}>
             <p>{education?.institute}</p>
             <p className="greyed-text">
-              {education?.degree} | {moment(education?.eduStartdate).format('MMM YYYY')} - 
-              {moment(education?.eduEndDate).format('MMM YYYY')}
+              {education?.degree} |{" "}
+              {moment(education?.eduStartdate).format("MMM YYYY")} -
+              {moment(education?.eduEndDate).format("MMM YYYY")}
             </p>
           </div>
         ))}
 
         {/* Skills */}
-      {data?.skills&&  <div className="resume-skills">
-          <h3>SKILLS</h3>
-          <SkillTag skillsData={data?.skills} />
-        </div>}
+        {data?.skills && (
+          <div className="resume-skills">
+            <h3>SKILLS</h3>
+            <SkillTag skillsData={data?.skills} />
+          </div>
+        )}
       </div>
     </>
   );
