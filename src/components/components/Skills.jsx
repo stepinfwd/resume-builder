@@ -15,7 +15,7 @@ function Skills({ skillData }) {
      skillData(selectedOption);
     }
     wrapFunc();
-  }, [selectedOption]);
+  }, [selectedOption,skillData]);
   const options = [
     { value: "HTML", label: "HTML" },
     { value: "REACTJS", label: "REACTJS" },
