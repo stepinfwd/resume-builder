@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState,useCallback} from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -47,10 +47,10 @@ function Form({ resumeData }) {
   const [skills, setSkills] = useState();
   const history = useHistory();
 
-  const skillData = (data) => {
+  const skillData = useCallback((data) => {
     const skillMapped = data?.map((item) => item.value);
     setSkills(skillMapped);
-  };
+  },[]);
 
   const onSubmit = (data) => {
     console.log("Data is", data);
