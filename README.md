@@ -1,7 +1,7 @@
 
 # Project Title
 
-A React project for build resume
+A React project for building resumes
 
 
 ## Demo
