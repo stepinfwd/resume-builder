@@ -8,12 +8,12 @@ import { useHistory } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 const resumeSchema = yup.object().shape({
-  // firstName: yup.string().required(),
-  // lastName: yup.string().required(),
-  // github: yup.string().url().required(),
-  // address: yup.string().required(),
-  // phoneNo: yup.number().required(),
-  // email: yup.string().email("Must be a valid email").max(255).required(),
+  firstName: yup.string().required(),
+  lastName: yup.string().required(),
+  github: yup.string().url().required(),
+  address: yup.string().required(),
+  phoneNo: yup.number().required(),
+  email: yup.string().email("Must be a valid email").max(255).required(),
 });
 function Form({ resumeData }) {
   const {
