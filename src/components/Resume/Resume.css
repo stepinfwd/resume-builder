@@ -1,3 +1,8 @@
+@media only screen and (max-width: 600px) {
+  .resume {
+    padding-left: 0rem!important;
+  }
+}
 .resume {
   padding-left: 4rem;
   margin: 2rem;
@@ -36,7 +41,8 @@ p{
 /* SKILL TAG */
 .skill-tag {
     display: flex;
-    justify-content:space-around
+    justify-content:space-around;
+    padding-left:4rem;
 }
 .skill-tag p{
     width: 100%;

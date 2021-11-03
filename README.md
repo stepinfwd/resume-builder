@@ -4,5 +4,5 @@ Used Tech
 ----------------------------------------------------------------
 
 React js for ui
-react select ,react hook form ,moment , react datepicker , jspdf
+react select ,react hook form ,moment , react datepicker , jspdf,
 yup for validation
